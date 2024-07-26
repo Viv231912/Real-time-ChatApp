@@ -12,11 +12,11 @@ import {
   orderBy,
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-class Chatroom {
+export class Chatroom {
   constructor(room, username) {
     (this.room = room), (this.username = username);
     this.chats = collection(window.db, "chats");
-    this.unsub;
+    this.unsubscribe;
   }
   // adding new chat documents
   async addChat(message) {
@@ -65,17 +65,4 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom("general", "vivian");
 
-chatroom.getChats((data) => {
-  console.log(data);
-});
-
-setTimeout(() => {
-    chatroom.updateRoom("gaming");
-    chatroom.updateName('yoshi')
-    chatroom.getChats((data) => {
-        console.log(data);
-    });
-    chatroom.addChat('hello')
-}, 3000);
