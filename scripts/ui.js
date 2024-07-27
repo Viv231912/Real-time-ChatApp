@@ -1,19 +1,22 @@
 //  render chat templates to the DOM
 // clear the list of chats (when the room changes)
+import { formatDistanceToNow } from "https://unpkg.com/date-fns/formatDistanceToNow.mjs";
 
-class ChatUI {
-    constructor(list){
-        this.list = list;
-    }
-    render(data){
-        const html  = `
+export class ChatUI {
+  constructor(list) {
+    this.list = list;
+  }
+  render(data) {
+    const when = formatDistanceToNow(data.created_at.toDate(), {
+      addSuffix: true,
+    });
+    const html = `
             <li class="list-group-item">
                 <span class="username">${data.username}</span>
                 <span class="message">${data.message}</span>
-                <div class="time">${data.created_at.toDate()}</div>
+                <div class="time">${when}</div>
             </li>
         `;
-        this.list.innerHTML += html;
-
-    }
+    this.list.innerHTML += html;
+  }
 }
